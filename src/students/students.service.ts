@@ -12,9 +12,9 @@ export class StudentsService {
     private readonly studentRepository: Repository<Student>,
   ) {}
 
-  async create(createStudentDto: CreateStudentDto) {
-    return await this.studentRepository.save(createStudentDto);
-  }
+  // async create(createStudentDto: CreateStudentDto) {
+  //   return await this.studentRepository.save(createStudentDto);
+  // }
 
   async findAll() {
     return await this.studentRepository.find();
@@ -23,11 +23,12 @@ export class StudentsService {
   async remove(id: string) {
     return await this.studentRepository.softDelete(id);
   }
-  async update(id: string, updateStudentDto: UpdateStudentDto) {
-    return await this.studentRepository.update(id, updateStudentDto);
-  }
 
-  async findOne(id: string) {
-    return await this.studentRepository.findOneBy({ id });
+  // async update(id: string, updateStudentDto: UpdateStudentDto) {
+  //   return await this.studentRepository.update(id, updateStudentDto);
+  // }
+
+  async findOneByCedula(cedula: string) {
+    return await this.studentRepository.findOneBy({ cedula: cedula });
   }
 }

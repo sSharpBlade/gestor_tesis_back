@@ -1,21 +1,37 @@
-import { Column, DeleteDateColumn, Entity } from 'typeorm';
+import { Career } from 'src/careers/entities/career.entity';
+import { Teacher } from 'src/teachers/entities/teacher.entity';
+import { Thesis } from 'src/thesis/entities/thesis.entity';
+import {
+  Column,
+  DeleteDateColumn,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class Student {
-  @Column({ primary: true })
-  id: string;
+  @PrimaryGeneratedColumn()
+  id_student: number;
+
+  @Column({ unique: true })
+  cedula: string;
 
   @Column({ nullable: false })
-  name: string;
+  firstname: string;
 
   @Column({ nullable: false })
-  career: string;
+  lastname: string;
 
-  @Column({ default: 'Proceso' })
-  state: string;
+  @ManyToOne(() => Career, (career) => career.students, { eager: true })
+  career: Career;
 
-  @Column({ default: 0 })
-  percentage: number;
+  @ManyToOne(() => Teacher, (teacher) => teacher.students, { eager: true })
+  teacher: Teacher;
+
+  @OneToMany(() => Thesis, (thesis) => thesis.student)
+  theses: Thesis[];
 
   @DeleteDateColumn()
   deletedAt: Date;
