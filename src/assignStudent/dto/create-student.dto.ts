@@ -6,9 +6,9 @@ import {
   IsOptional,
   IsDate,
 } from 'class-validator';
-import { Careers } from 'src/entities/Careers.entity';
-import { Teachers } from 'src/entities/Teachers.entity';
-import { Thesis } from 'src/entities/Thesis.entity';
+import { Career } from 'src/careers/entities/career.entity';
+import { Teacher } from 'src/teachers/entities/teacher.entity';
+import { Thesis } from 'src/thesis/entities/Thesis.entity';
 
 export class CreateStudentDto {
 
@@ -37,10 +37,10 @@ export class CreateStudentDto {
 
   
   @IsNotEmpty()
-  idCareer: Careers;
+  idCareer: Career;
   
   @IsNotEmpty()
-  idTeacher: Teachers;
+  idTeacher: Teacher;
   
   theses: Thesis[];
 

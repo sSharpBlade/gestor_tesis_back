@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { CreateThesisDto } from './dto/create-thesis.dto';
 import { UpdateThesisDto } from './dto/update-thesis.dto';
-import { Thesis } from './entities/thesis.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Thesis } from './entities/Thesis.entity';
 
 @Injectable()
 export class ThesisService {

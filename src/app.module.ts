@@ -7,26 +7,26 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { TeachersModule } from './teachers/teachers.module';
 import { CareersModule } from './careers/careers.module';
 import { ThesisModule } from './thesis/thesis.module';
+import { AssignStudentModule } from './assignStudent/student.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'dpg-cp9pbilds78s73cm157g-a.oregon-postgres.render.com',
+      host: 'localHost',
       port: 5432,
-      username: 'gestor_72h4_user',
-      password: 'jI3F8I8m94wAKeS74A7MZN2aIr52gs6U',
-      database: 'gestor_72h4',
+      username: 'soporte',
+      password: 'root',
+      database: 'prueba',
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
       autoLoadEntities: true,
       synchronize: true,
-      ssl: {
-        rejectUnauthorized: false, // Utilizar true si tienes un certificado válido
-      },
     }),
     TeachersModule,
     CareersModule,
     StudentsModule,
     ThesisModule,
+    AssignStudentModule
   ],
   controllers: [AppController],
   providers: [AppService],

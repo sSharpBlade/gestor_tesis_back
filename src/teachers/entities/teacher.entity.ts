@@ -1,26 +1,28 @@
-import { Student } from 'src/students/entities/student.entity';
+import { Student } from "src/students/entities/student.entity";
 import {
   Column,
   DeleteDateColumn,
   Entity,
+  Index,
   OneToMany,
   PrimaryGeneratedColumn,
-} from 'typeorm';
+} from "typeorm";
 
-@Entity()
+//@Index("teachers_pkey", ["idTeacher"], { unique: true })
+@Entity("teachers", { schema: "public" })
 export class Teacher {
-  @PrimaryGeneratedColumn()
-  id_teacher: number;
+  @PrimaryGeneratedColumn({ type: "integer", name: "id_teacher" })
+  idTeacher: number;
 
-  @Column({ length: 50, nullable: false })
+  @Column("character varying", { name: "email", length: 50 })
   email: string;
 
-  @Column({ length: 100, nullable: false })
+  @Column("character varying", { name: "password", length: 100 })
   password: string;
-
-  @OneToMany(() => Student, (student) => student.teacher)
-  students: Student[];
 
   @DeleteDateColumn()
   deletedAt: Date;
+
+  @OneToMany(() => Student, (students) => students.teacher)
+  students: Student[];
 }

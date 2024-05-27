@@ -5,7 +5,7 @@ import {
   IsDate,
   IsNotEmpty,
 } from 'class-validator';
-import { Students } from 'src/entities/Students.entity';
+import { Student } from 'src/students/entities/student.entity';
 export class CreateThesisDto {
 
   @IsOptional()
@@ -30,5 +30,5 @@ export class CreateThesisDto {
 
   @IsOptional()
   @IsInt()
-  idStudent: Students;
+  student: Student;
 }
