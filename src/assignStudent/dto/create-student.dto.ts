@@ -37,10 +37,10 @@ export class CreateStudentDto {
 
   
   @IsNotEmpty()
-  idCareer: Career;
+  career: Career;
   
   @IsNotEmpty()
-  idTeacher: Teacher;
+  teacher: Teacher;
   
   theses: Thesis[];
 }

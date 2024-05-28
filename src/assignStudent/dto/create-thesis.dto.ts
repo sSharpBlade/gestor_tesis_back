@@ -21,7 +21,7 @@ export class CreateThesisDto {
   state: string = "En curso";
 
   @IsNotEmpty()
-  @IsDate()
+  @IsString()
   approvalDate:Date;
 
   @IsOptional()
