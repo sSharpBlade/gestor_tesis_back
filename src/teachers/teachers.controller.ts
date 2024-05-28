@@ -34,12 +34,19 @@ export class TeachersController {
   }
 
   @Post('by-email')
-  async getTeacherByEmail(@Query('email') email: string): Promise<Teacher> {
+  async getTeacherByEmail(@Body() body: { email: string; password: string }): Promise<Teacher> {
+    const { email, password } = body;
     const teacher = await this.teachersService.findByEmail(email);
+
     if (!teacher) {
       throw new NotFoundException('Teacher not found');
     }
-    console.log(teacher)
+
+    // Aquí puedes agregar lógica adicional para verificar la contraseña
+    if (teacher.password !== password) {
+      throw new NotFoundException('Invalid credentials');
+    }
+
     return teacher;
   }
 }
