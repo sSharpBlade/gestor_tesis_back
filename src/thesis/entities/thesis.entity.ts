@@ -1,20 +1,35 @@
 import { Student } from 'src/students/entities/student.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  DeleteDateColumn,
+  Entity,
+  Index,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
-@Entity()
+@Entity('thesis', { schema: 'public' })
 export class Thesis {
-  @PrimaryGeneratedColumn()
-  id_thesis: number;
+  @PrimaryGeneratedColumn({ type: 'integer', name: 'id_thesis' })
+  idThesis: number;
 
-  @Column({ nullable: false })
-  issue: string;
+  @Column('varchar', { name: 'issue', length: 50, nullable: false })
+  issue: string ;
 
-  @Column({ default: 0 })
-  finalstate: number;
-
-  @Column({ nullable: true })
+  @Column('varchar', { name: 'state', length: 50, default: 'En curso' })
   state: string;
 
-  @ManyToOne(() => Student, (student) => student.theses, { eager: true })
+  @Column({type: 'integer', name: 'finalstate', default: 0 })
+  finalstate: number;
+
+  @Column({ type: 'date', name: 'approval_date', nullable: true }) // Nueva columna para la fecha de aprobación
+  approvalDate: Date | null;
+
+  @DeleteDateColumn()
+  deletedAt: Date;
+
+  @ManyToOne(() => Student, (students) => students.theses)
+  @JoinColumn([{ name: 'id_student', referencedColumnName: 'idStudent' }])
   student: Student;
 }

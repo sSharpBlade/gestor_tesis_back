@@ -1,38 +1,47 @@
-import { Career } from 'src/careers/entities/career.entity';
-import { Teacher } from 'src/teachers/entities/teacher.entity';
-import { Thesis } from 'src/thesis/entities/thesis.entity';
 import {
   Column,
   DeleteDateColumn,
   Entity,
+  Index,
+  JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
-} from 'typeorm';
+} from "typeorm";
+import { Teacher } from "../../teachers/entities/teacher.entity";
+import { Thesis } from "../../thesis/entities/Thesis.entity";
+import { Career } from "src/careers/entities/career.entity";
 
-@Entity()
+//@Index("students_pkey", ["idStudent"], { unique: true })
+@Entity("students", { schema: "public" })
 export class Student {
-  @PrimaryGeneratedColumn()
-  id_student: number;
+  @PrimaryGeneratedColumn({ type: "integer", name: "id_student" })
+  idStudent: number;
 
-  @Column({ unique: true })
-  cedula: string;
+  @Column("character", { name: "cedula", nullable: true, length: 10 })
+  cedula: string | null;
 
-  @Column({ nullable: false })
-  firstname: string;
+  @Column("character varying", {
+    name: "firstname",
+    nullable: true,
+    length: 30,
+  })
+  firstname: string | null;
 
-  @Column({ nullable: false })
-  lastname: string;
+  @Column("character varying", { name: "lastname", nullable: true, length: 30 })
+  lastname: string | null;
 
-  @ManyToOne(() => Career, (career) => career.students, { eager: true })
+  @DeleteDateColumn()
+  deletedAt: Date;
+
+  @ManyToOne(() => Career, (careers) => careers.students)
+  @JoinColumn([{ name: "id_career", referencedColumnName: "idCareer" }])
   career: Career;
 
-  @ManyToOne(() => Teacher, (teacher) => teacher.students, { eager: true })
+  @ManyToOne(() => Teacher, (teachers) => teachers.students)
+  @JoinColumn([{ name: "id_teacher", referencedColumnName: "idTeacher" }])
   teacher: Teacher;
 
   @OneToMany(() => Thesis, (thesis) => thesis.student)
   theses: Thesis[];
-
-  @DeleteDateColumn()
-  deletedAt: Date;
 }

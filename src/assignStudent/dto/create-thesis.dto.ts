@@ -5,23 +5,23 @@ import {
   IsDate,
   IsNotEmpty,
 } from 'class-validator';
-import { Students } from 'src/entities/Students.entity';
+import { Student } from 'src/students/entities/student.entity';
 export class CreateThesisDto {
 
   @IsOptional()
   @IsInt()
   idThesis: number;
 
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
-  issue: string | null;
+  issue: string;
 
   @IsOptional()
   @IsString()
   state: string = "En curso";
 
   @IsNotEmpty()
-  @IsDate()
+  @IsString()
   approvalDate:Date;
 
   @IsOptional()
@@ -30,5 +30,5 @@ export class CreateThesisDto {
 
   @IsOptional()
   @IsInt()
-  idStudent: Students;
+  student: Student;
 }
