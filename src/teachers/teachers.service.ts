@@ -21,8 +21,8 @@ export class TeachersService {
     return 'This action adds a new teacher';
   }
 
-  findAll() {
-    return `This action returns all teachers`;
+  async findAll(): Promise<Teacher[]> {
+    return await this.teachersRepository.find();
   }
 
   findOne(id: number) {
