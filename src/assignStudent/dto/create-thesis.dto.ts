@@ -12,9 +12,9 @@ export class CreateThesisDto {
   @IsInt()
   idThesis: number;
 
-  @IsOptional()
+  @IsNotEmpty()
   @IsString()
-  issue: string | null;
+  issue: string;
 
   @IsOptional()
   @IsString()

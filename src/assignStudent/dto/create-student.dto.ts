@@ -43,7 +43,4 @@ export class CreateStudentDto {
   idTeacher: Teacher;
   
   theses: Thesis[];
-
-  
-
 }
