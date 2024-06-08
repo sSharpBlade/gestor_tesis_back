@@ -27,6 +27,9 @@ export class Reports {
   @Column('date', { name: 'signedAt', nullable: true })
   signedAt: string | null;
 
+  @Column('date', { name: 'modsigned', nullable: true })
+  modsigned: string | null;
+
   @ManyToOne(() => Thesis, (thesis) => thesis.reports)
   @JoinColumn([{ name: 'id_thesis', referencedColumnName: 'idThesis' }])
   idThesis: Thesis;
