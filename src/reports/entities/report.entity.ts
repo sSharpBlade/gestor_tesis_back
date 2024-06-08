@@ -1,5 +1,6 @@
 import {
   Column,
+  DeleteDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
@@ -16,6 +17,7 @@ export class Reports {
   title: string;
 
   @Column('timestamp without time zone', { name: 'deletedAt', nullable: true })
+  @DeleteDateColumn()
   deletedAt: Date | null;
 
   @Column('date', { name: 'date' })
@@ -33,4 +35,9 @@ export class Reports {
   @ManyToOne(() => Thesis, (thesis) => thesis.reports)
   @JoinColumn([{ name: 'id_thesis', referencedColumnName: 'idThesis' }])
   idThesis: Thesis;
+}
+function SoftDeleteEntity(
+  arg0: string,
+): (target: typeof Reports) => void | typeof Reports {
+  throw new Error('Function not implemented.');
 }

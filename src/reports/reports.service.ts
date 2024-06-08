@@ -33,7 +33,7 @@ export class ReportsService {
     return `This action updates a #${id} report`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} report`;
+  async remove(id: number) {
+    return await this.reportsRepository.softDelete(id);
   }
 }
