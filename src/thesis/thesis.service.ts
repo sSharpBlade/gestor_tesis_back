@@ -1,6 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { CreateThesisDto } from './dto/create-thesis.dto';
-import { UpdateThesisDto } from './dto/update-thesis.dto';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Thesis } from './entities/Thesis.entity';
@@ -11,17 +9,12 @@ export class ThesisService {
     @InjectRepository(Thesis)
     private readonly thesisRepository: Repository<Thesis>,
   ) {}
-  create(createThesisDto: CreateThesisDto) {
-    return 'This action adds a new thesis';
-  }
+
 
   async findAll() {
     return await this.thesisRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} thesis`;
-  }
 
   async findThesesByTeacherId(teacherId: number): Promise<Thesis[]> {
     return this.thesisRepository
@@ -33,11 +26,4 @@ export class ThesisService {
       .getMany();
   }
 
-  update(id: number, updateThesisDto: UpdateThesisDto) {
-    return `This action updates a #${id} thesis`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} thesis`;
-  }
 }

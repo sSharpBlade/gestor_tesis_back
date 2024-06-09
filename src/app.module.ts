@@ -8,25 +8,29 @@ import { TeachersModule } from './teachers/teachers.module';
 import { CareersModule } from './careers/careers.module';
 import { ThesisModule } from './thesis/thesis.module';
 import { AssignStudentModule } from './assignStudent/student.module';
+import { ReportsModule } from './reports/reports.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localHost',
+      host: 'dpg-cp9pbilds78s73cm157g-a.oregon-postgres.render.com',
       port: 5432,
-      username: 'soporte',
-      password: 'root',
-      database: 'prueba',
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      username: 'gestor_72h4_user',
+      password: 'jI3F8I8m94wAKeS74A7MZN2aIr52gs6U',
+      database: 'gestor_72h4',
       autoLoadEntities: true,
       synchronize: true,
+      ssl: {
+        rejectUnauthorized: false, // Utilizar true si tienes un certificado válido
+      },
     }),
     TeachersModule,
     CareersModule,
     StudentsModule,
     ThesisModule,
-    AssignStudentModule
+    AssignStudentModule,
+    ReportsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

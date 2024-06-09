@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { TeachersService } from './teachers.service';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, NotFoundException } from '@nestjs/common';
+import { TeachersService, UserFindOne } from './teachers.service';
 import { CreateTeacherDto } from './dto/create-teacher.dto';
 import { UpdateTeacherDto } from './dto/update-teacher.dto';
+import { Teacher } from './entities/teacher.entity';
 
 @Controller('teachers')
 export class TeachersController {
@@ -30,5 +31,22 @@ export class TeachersController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.teachersService.remove(+id);
+  }
+
+  @Post('by-email')
+  async getTeacherByEmail(@Body() body: { email: string; password: string }): Promise<Teacher> {
+    const { email, password } = body;
+    const teacher = await this.teachersService.findByEmail(email);
+
+    if (!teacher) {
+      throw new NotFoundException('Teacher not found');
+    }
+
+    // Aquí puedes agregar lógica adicional para verificar la contraseña
+    if (teacher.password !== password) {
+      throw new NotFoundException('Invalid credentials');
+    }
+
+    return teacher;
   }
 }
