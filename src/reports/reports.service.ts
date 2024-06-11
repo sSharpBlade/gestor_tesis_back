@@ -18,7 +18,7 @@ export class ReportsService {
 
     const newReport = this.reportsRepository.create({
       ...reportData,
-      idThesis: { idThesis } as Thesis, 
+      idThesis: { idThesis }, 
     });
 
     return await this.reportsRepository.save(newReport);

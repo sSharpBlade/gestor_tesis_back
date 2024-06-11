@@ -36,5 +36,5 @@ export class CreateReportDto {
 
   @IsOptional()
   @IsDateString()
-  modSigned: string;
+  modsigned: string;
 }

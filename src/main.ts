@@ -14,7 +14,7 @@ async function bootstrap() {
     })
   );
   app.enableCors({
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
+    methods: ['GET', 'POST', 'PUT','PATCH', 'DELETE'], // Métodos permitidos
     allowedHeaders: ['Content-Type', 'Authorization'], // Cabeceras permitidas
     preflightContinue: false,
     optionsSuccessStatus: 204,
