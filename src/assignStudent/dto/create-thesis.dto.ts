@@ -1,32 +1,25 @@
-import {
-  IsString,
-  IsInt,
-  IsOptional,
-  IsDate,
-  IsNotEmpty,
-} from 'class-validator';
+import { IsString, IsInt, IsOptional, IsDate } from 'class-validator';
 import { Student } from 'src/students/entities/student.entity';
-export class CreateThesisDto {
 
+export class CreateThesisDto {
   @IsOptional()
   @IsInt()
-  idThesis: number;
+  finalstate: number;
 
-  @IsNotEmpty()
   @IsString()
   issue: string;
 
   @IsOptional()
   @IsString()
-  state: string = "En curso";
-
-  @IsNotEmpty()
+  state: string;
+  
+  @IsOptional()
   @IsString()
-  approvalDate:Date;
+  approvalDate: string | null;
 
   @IsOptional()
   @IsDate()
-  deletedAt: Date;
+  deletedAt: Date | null;
 
   @IsOptional()
   @IsInt()

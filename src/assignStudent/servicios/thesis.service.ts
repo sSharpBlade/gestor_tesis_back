@@ -1,7 +1,7 @@
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { CreateThesisDto } from "../dto/create-thesis.dto";
-import { Thesis } from "src/thesis/entities/Thesis.entity";
+import { Thesis } from "src/thesis/entities/thesis.entity";
 
 export class ThesisService{
     constructor(

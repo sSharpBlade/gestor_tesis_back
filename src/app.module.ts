@@ -9,6 +9,7 @@ import { CareersModule } from './careers/careers.module';
 import { ThesisModule } from './thesis/thesis.module';
 import { AssignStudentModule } from './assignStudent/student.module';
 import { ReportsModule } from './reports/reports.module';
+import { ActivitiesModule } from './activities/activities.module';
 
 @Module({
   imports: [
@@ -19,8 +20,9 @@ import { ReportsModule } from './reports/reports.module';
       username: 'gestor_72h4_user',
       password: 'jI3F8I8m94wAKeS74A7MZN2aIr52gs6U',
       database: 'gestor_72h4',
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
       autoLoadEntities: true,
-      synchronize: true,
+      synchronize: false,
       ssl: {
         rejectUnauthorized: false, // Utilizar true si tienes un certificado válido
       },
@@ -31,6 +33,7 @@ import { ReportsModule } from './reports/reports.module';
     ThesisModule,
     AssignStudentModule,
     ReportsModule,
+    ActivitiesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

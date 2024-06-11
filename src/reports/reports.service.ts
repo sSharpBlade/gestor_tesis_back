@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateReportDto } from './dto/create-report.dto';
 import { UpdateReportDto } from './dto/update-report.dto';
 import { Repository } from 'typeorm';
@@ -27,6 +27,17 @@ export class ReportsService {
       .leftJoinAndSelect('thesis.student', 'student')
       .where('student.cedula = :cedula', { cedula })
       .getMany();
+  }
+
+  async findOne(id:number): Promise<Reports>{
+    const report = await this.reportsRepository.findOne({
+      where:{idReport:id}
+    })
+    if (!report) {
+      throw new NotFoundException("This report does not exist")
+    }
+
+    return report
   }
 
   update(id: number, updateReportDto: UpdateReportDto) {

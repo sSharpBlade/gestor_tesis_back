@@ -3,7 +3,6 @@ import { CreateStudentDto } from './dto/create-student.dto';
 import { StudentService } from './servicios/student.service';
 import { CreateThesisDto } from './dto/create-thesis.dto';
 import { ThesisService } from './servicios/thesis.service';
-import { Thesis } from 'src/thesis/entities/Thesis.entity';
 
 @Controller('assignStudent')
 export class AssignStudentController {
