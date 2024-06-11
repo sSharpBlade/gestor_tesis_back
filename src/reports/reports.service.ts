@@ -46,6 +46,17 @@ export class ReportsService {
     const updatedReport = Object.assign(report, updateReportDto);
     return this.reportsRepository.save(updatedReport);
   }
+  // async findOne2(id:number): Promise<Reports>{
+  //   const report = await this.reportsRepository.findOne({
+  //     where:{idReport:id}
+  //   })
+  //   if (!report) {
+  //     throw new NotFoundException("This report does not exist")
+  //   }
+
+  //   return report
+  // }
+
 
   async remove(id: number) {
     return await this.reportsRepository.softDelete(id);

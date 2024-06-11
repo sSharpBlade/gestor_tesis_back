@@ -9,8 +9,8 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { Teacher } from "../../teachers/entities/teacher.entity";
-import { Thesis } from "../../thesis/entities/Thesis.entity";
 import { Career } from "src/careers/entities/career.entity";
+import { Thesis } from "src/thesis/entities/thesis.entity";
 
 //@Index("students_pkey", ["idStudent"], { unique: true })
 @Entity("students", { schema: "public" })
