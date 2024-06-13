@@ -1,9 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateTeacherDto } from './dto/create-teacher.dto';
 import { UpdateTeacherDto } from './dto/update-teacher.dto';
 import { Teacher } from './entities/teacher.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import * as bcrypt from 'bcrypt';
 
 export interface UserFindOne{
   id?: number;
@@ -17,9 +18,15 @@ export class TeachersService {
     @InjectRepository(Teacher)
     private readonly teachersRepository: Repository<Teacher>
 ){}
-  create(createTeacherDto: CreateTeacherDto) {
-    return 'This action adds a new teacher';
-  }
+async create(createTeacherDto: CreateTeacherDto): Promise<Teacher> {
+  const { email, password } = createTeacherDto;
+  const hashedPassword = await bcrypt.hash(password, 10);
+  const newTeacher = this.teachersRepository.create({
+    email,
+    password: hashedPassword,
+  });
+  return this.teachersRepository.save(newTeacher);
+}
 
   async findAll(): Promise<Teacher[]> {
     return await this.teachersRepository.find();
@@ -40,4 +47,5 @@ export class TeachersService {
   async findByEmail(email: string): Promise<Teacher | undefined> {
     return this.teachersRepository.findOne({ where: { email } });
   }
+
 }

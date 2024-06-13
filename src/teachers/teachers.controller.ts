@@ -3,6 +3,7 @@ import { TeachersService, UserFindOne } from './teachers.service';
 import { CreateTeacherDto } from './dto/create-teacher.dto';
 import { UpdateTeacherDto } from './dto/update-teacher.dto';
 import { Teacher } from './entities/teacher.entity';
+import * as bcrypt from 'bcrypt';
 
 @Controller('teachers')
 export class TeachersController {
@@ -42,11 +43,13 @@ export class TeachersController {
       throw new NotFoundException('Teacher not found');
     }
 
-    // Aquí puedes agregar lógica adicional para verificar la contraseña
-    if (teacher.password !== password) {
+    const isPasswordMatching = await bcrypt.compare(password, teacher.password);
+    if (!isPasswordMatching) {
       throw new NotFoundException('Invalid credentials');
     }
 
     return teacher;
   }
+
+
 }
