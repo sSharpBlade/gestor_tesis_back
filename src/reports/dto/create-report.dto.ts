@@ -5,6 +5,7 @@ import {
   IsDateString,
   IsNotEmpty,
 } from 'class-validator';
+import { Column } from 'typeorm';
 
 export class CreateReportDto {
   @IsOptional()
@@ -31,7 +32,9 @@ export class CreateReportDto {
   @IsDateString()
   signedAt: string;
 
+  @IsOptional()
   @IsInt()
+  @Column({ type: 'int', default: 0 })
   percentage: number;
 
   @IsOptional()
