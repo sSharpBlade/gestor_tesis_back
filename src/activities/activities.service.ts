@@ -11,19 +11,31 @@ export class ActivitiesService {
   constructor(
     @InjectRepository(Activities)
     private readonly activityRepository: Repository<Activities>,
-    private reportsService: ReportsService
+    private reportsService: ReportsService,
   ) {}
 
   async createActivities(createActivitiesDto: CreateActivityDto) {
-    const activity =  this.activityRepository.create(createActivitiesDto)
+    const activity = this.activityRepository.create(createActivitiesDto);
     return this.activityRepository.save(activity);
   }
 
   async findActivities(id: number): Promise<Activities[]> {
-    return await this.activityRepository.createQueryBuilder('activity')
+    return await this.activityRepository
+      .createQueryBuilder('activity')
       .leftJoinAndSelect('activity.idReport', 'report')
       .where('report.idReport = :id', { id })
       .andWhere('activity.deletedat IS NULL')
+      .getMany();
+  }
+
+  async findActivitiesByThesis(id: number): Promise<Activities[]> {
+    return await this.activityRepository
+      .createQueryBuilder('activity')
+      .leftJoinAndSelect('activity.idReport', 'report')
+      .leftJoinAndSelect('report.idThesis', 'thesis')
+      .where('thesis.idThesis = :id', { id })
+      .andWhere('activity.deletedat IS NULL')
+      .orderBy('activity.idActivity', 'ASC')
       .getMany();
   }
 
@@ -31,18 +43,17 @@ export class ActivitiesService {
     const activity = await this.activityRepository.findOne({
       where: {
         idActivity: id,
-        deletedat: null
-      }
+        deletedat: null,
+      },
     });
     if (!activity) {
-      throw new NotFoundException("The activity does not exist");
+      throw new NotFoundException('The activity does not exist');
     }
     return activity;
   }
 
   async update(id: number, updateActivityDto: UpdateActivityDto) {
-    
-    return await this.activityRepository.update(id,updateActivityDto);
+    return await this.activityRepository.update(id, updateActivityDto);
   }
 
   async remove(id: number): Promise<string> {

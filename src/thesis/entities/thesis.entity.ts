@@ -15,7 +15,7 @@ export class Thesis {
   @PrimaryGeneratedColumn({ type: 'integer', name: 'id_thesis' })
   idThesis: number;
 
-  @Column('varchar', { name: 'issue', length: 50, nullable: false })
+  @Column("text", { name: 'issue'})
   issue: string;
 
   @Column('varchar', { name: 'state', length: 50, default: 'En curso' })
