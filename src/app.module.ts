@@ -22,7 +22,7 @@ import { ActivitiesModule } from './activities/activities.module';
       database: 'gestor_72h4',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       autoLoadEntities: true,
-      synchronize: false,
+      synchronize: true,
       ssl: {
         rejectUnauthorized: false, // Utilizar true si tienes un certificado válido
       },

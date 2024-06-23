@@ -41,7 +41,7 @@ export class ActivitiesController {
     @Param('id') id: string,
     @Body() updateActivityDto: UpdateActivityDto,
   ) {
-    return this.activitiesService.update(+id, updateActivityDto);
+        return this.activitiesService.update(+id, updateActivityDto);
   }
 
   @Delete(':id')
