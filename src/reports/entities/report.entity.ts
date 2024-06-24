@@ -25,8 +25,8 @@ export class Reports {
 
   @Column('date', { name: 'date' })
   date: string;
-
-  @Column('integer', { name: 'percentage' })
+  
+  @Column('integer', { name: 'percentage', default: 0 })
   percentage: number;
 
   @OneToMany(() => Activities, (activities) => activities.idReport)
