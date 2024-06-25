@@ -10,22 +10,24 @@ import { ThesisModule } from './thesis/thesis.module';
 import { AssignStudentModule } from './assignStudent/student.module';
 import { ReportsModule } from './reports/reports.module';
 import { ActivitiesModule } from './activities/activities.module';
+import { ConfigModule } from '@nestjs/config/dist/config.module';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'dpg-cp9pbilds78s73cm157g-a.oregon-postgres.render.com',
+      host: process.env.HOST,
       port: 5432,
-      username: 'gestor_72h4_user',
-      password: 'jI3F8I8m94wAKeS74A7MZN2aIr52gs6U',
-      database: 'gestor_72h4',
+      username: process.env.USER,
+      password: process.env.PASSWORD,
+      database: process.env.DATABASE,
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       autoLoadEntities: true,
       synchronize: true,
-      ssl: {
-        rejectUnauthorized: false, // Utilizar true si tienes un certificado válido
-      },
+      ssl: false,
     }),
     TeachersModule,
     CareersModule,
