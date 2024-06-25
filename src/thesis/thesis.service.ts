@@ -12,6 +12,7 @@ export class ThesisService {
 
 
   async findAll() {
+        
     return await this.thesisRepository.find();
   }
 
