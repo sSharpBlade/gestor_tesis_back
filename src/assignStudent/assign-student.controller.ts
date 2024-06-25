@@ -29,6 +29,7 @@ export class AssignStudentController {
     if(!validateDni(createStudentDto.cedula)) throw new BadRequestException({ message: 'La cédula no es correcta' });
     const student = await this.studentService.findOneCedula(createStudentDto.cedula);
     if (student) throw new ConflictException({message:'El estudiante ya existe'});
+    
       const newStudent = await this.studentService.create(createStudentDto);
       createThesisDto.student = newStudent;
       const newThesis = await this.thesisService.createThesis(createThesisDto);
