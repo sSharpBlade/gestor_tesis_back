@@ -27,7 +27,7 @@ import { ConfigModule } from '@nestjs/config/dist/config.module';
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       autoLoadEntities: true,
       synchronize: true,
-      ssl: false,
+      ssl: process.env.SSL === 'true',
     }),
     TeachersModule,
     CareersModule,
